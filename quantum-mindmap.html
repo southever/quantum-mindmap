@@ -1,0 +1,1039 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>大学物理 A(3) 量子力学思维导图</title>
+  <style>
+    :root {
+      --primary: #024ad8;
+      --primary-deep: #0e3191;
+      --primary-soft: #c9e0fc;
+      --ink: #1a1a1a;
+      --canvas: #ffffff;
+      --cloud: #f7f7f7;
+      --fog: #e8e8e8;
+      --steel: #c2c2c2;
+      --graphite: #636363;
+      --charcoal: #3d3d3d;
+      --shadow: 0 2px 8px rgba(26, 26, 26, 0.08);
+      --max: 1366px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Forma DJR Micro", Manrope, Inter, "Microsoft YaHei", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--canvas);
+      line-height: 1.38;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    .utility {
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 24px;
+      color: #fff;
+      background: var(--ink);
+      font-size: 14px;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      min-height: 64px;
+      border-bottom: 1px solid var(--fog);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 32px;
+      min-height: 64px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: var(--ink);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-bottom: 2px solid transparent;
+      font-size: 15px;
+    }
+
+    .nav-links a:first-child {
+      border-color: var(--primary);
+    }
+
+    .search {
+      position: relative;
+      width: min(280px, 24vw);
+    }
+
+    .search input {
+      width: 100%;
+      height: 40px;
+      border: 1px solid var(--steel);
+      border-radius: 4px;
+      padding: 0 40px 0 12px;
+      outline: none;
+      background: #fff;
+    }
+
+    .search input:focus {
+      border-color: var(--ink);
+    }
+
+    .search span {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--graphite);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--cloud);
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 64px 32px 56px;
+      min-height: 520px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 420px;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .chevron {
+      position: absolute;
+      width: 92px;
+      height: 360px;
+      background: var(--primary);
+      transform: skewX(-22deg);
+      top: 78px;
+    }
+
+    .chevron.left { left: -42px; }
+    .chevron.right { right: -42px; }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      border: 1px solid var(--ink);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      background: #fff;
+    }
+
+    h1 {
+      margin: 22px 0 18px;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 680px;
+      margin: 0;
+      color: var(--charcoal);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      min-height: 44px;
+      border-radius: 4px;
+      border: 1px solid var(--ink);
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+      cursor: pointer;
+      background: #fff;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn.primary {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn.primary:active { background: var(--primary-deep); }
+
+    .viz {
+      position: relative;
+      z-index: 1;
+      min-height: 370px;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      overflow: hidden;
+      border: 1px solid var(--fog);
+    }
+
+    .orbital {
+      height: 230px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      margin-top: 8px;
+    }
+
+    .nucleus {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--ink);
+      box-shadow: 0 0 0 8px var(--primary-soft);
+    }
+
+    .orbit {
+      position: absolute;
+      border: 1.5px solid var(--steel);
+      border-radius: 50%;
+      animation: spin 18s linear infinite;
+    }
+
+    .orbit.one { width: 170px; height: 78px; transform: rotate(18deg); }
+    .orbit.two { width: 205px; height: 96px; transform: rotate(96deg); animation-duration: 22s; }
+    .orbit.three { width: 238px; height: 110px; transform: rotate(146deg); animation-duration: 26s; }
+
+    .electron {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes spin {
+      from { rotate: 0deg; }
+      to { rotate: 360deg; }
+    }
+
+    .formula-tile {
+      border-top: 1px solid var(--fog);
+      padding-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .formula-tile strong {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .formula-tile code {
+      display: block;
+      padding: 12px;
+      border-radius: 8px;
+      background: var(--cloud);
+      color: var(--ink);
+      font-family: "Times New Roman", "Microsoft YaHei", serif;
+      font-size: 18px;
+      white-space: normal;
+    }
+
+    section {
+      padding: 72px 32px;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: flex;
+      gap: 24px;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 56px);
+      line-height: 1;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--charcoal);
+    }
+
+    .progress-panel {
+      background: var(--ink);
+      color: #fff;
+      padding: 32px;
+      border-radius: 16px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .progress-title {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .bar {
+      height: 12px;
+      background: rgba(255,255,255,.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: var(--primary-soft);
+      transition: width .25s ease;
+    }
+
+    .progress-number {
+      font-size: 56px;
+      line-height: 1;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .tab {
+      min-height: 44px;
+      border: 1px solid var(--steel);
+      border-radius: 999px;
+      background: #fff;
+      padding: 8px 20px;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .tab.active {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .map-shell {
+      position: relative;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .center-node {
+      position: sticky;
+      top: 96px;
+      border-radius: 16px;
+      background: var(--cloud);
+      padding: 24px;
+      border: 1px solid var(--fog);
+    }
+
+    .center-node h3 {
+      margin: 0 0 12px;
+      font-size: 32px;
+      line-height: 1;
+      font-weight: 500;
+    }
+
+    .center-node p {
+      margin: 0 0 18px;
+      color: var(--charcoal);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .stat {
+      min-height: 70px;
+      border-radius: 8px;
+      background: #fff;
+      padding: 10px;
+      border: 1px solid var(--fog);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    .stat span {
+      color: var(--graphite);
+      font-size: 13px;
+    }
+
+    .branches {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .branch {
+      background: #fff;
+      border: 1px solid var(--fog);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      min-height: 320px;
+    }
+
+    .branch.hidden { display: none; }
+
+    .branch-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: start;
+      border-bottom: 1px solid var(--fog);
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+
+    .branch h3 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      line-height: 1.12;
+      font-weight: 500;
+    }
+
+    .branch small {
+      color: var(--graphite);
+      font-size: 13px;
+    }
+
+    .badge {
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff;
+      padding: 6px 10px;
+      white-space: nowrap;
+      font-size: 13px;
+    }
+
+    .node-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .node {
+      border: 1px solid var(--fog);
+      border-radius: 8px;
+      background: var(--cloud);
+      overflow: hidden;
+    }
+
+    .node label {
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 52px;
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+
+    .node input {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary);
+    }
+
+    .node-title {
+      font-weight: 500;
+    }
+
+    .node.done .node-title {
+      text-decoration: line-through;
+      color: var(--graphite);
+    }
+
+    .expand {
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+      color: var(--ink);
+    }
+
+    .detail {
+      display: none;
+      padding: 0 12px 14px 50px;
+      color: var(--charcoal);
+      font-size: 14px;
+    }
+
+    .node.open .detail {
+      display: block;
+    }
+
+    .formula-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .formula-card {
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid var(--fog);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      min-height: 190px;
+    }
+
+    .formula-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      line-height: 1.1;
+      font-weight: 500;
+    }
+
+    .formula {
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border-radius: 8px;
+      background: var(--cloud);
+      font-family: "Times New Roman", "Microsoft YaHei", serif;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .formula-card p {
+      margin: 0;
+      color: var(--charcoal);
+      font-size: 14px;
+    }
+
+    .cloud { background: var(--cloud); }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .review-card {
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid var(--fog);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .review-card h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    .review-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--charcoal);
+    }
+
+    .review-card li + li {
+      margin-top: 8px;
+    }
+
+    .footer {
+      background: var(--ink);
+      color: #fff;
+      padding: 48px 32px;
+    }
+
+    .footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer p {
+      margin: 0;
+      color: var(--steel);
+      max-width: 680px;
+    }
+
+    @media (max-width: 1040px) {
+      .nav-inner { grid-template-columns: 1fr; padding: 14px 24px; }
+      .nav-links { justify-content: flex-start; }
+      .search { width: 100%; }
+      .hero-inner { grid-template-columns: 1fr; min-height: auto; }
+      .viz { max-width: 520px; }
+      .map-shell { grid-template-columns: 1fr; }
+      .center-node { position: static; }
+      .formula-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .review-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      section { padding: 48px 18px; }
+      .hero-inner { padding: 48px 18px; gap: 28px; }
+      .chevron { display: none; }
+      .branches { grid-template-columns: 1fr; }
+      .progress-panel { grid-template-columns: 1fr; }
+      .progress-number { font-size: 44px; }
+      .formula-grid { grid-template-columns: 1fr; }
+      .section-head { display: grid; }
+      .branch { padding: 18px; }
+      .node label { grid-template-columns: 26px 1fr 32px; }
+      .detail { padding-left: 48px; }
+      .footer .wrap { display: grid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="utility">大学物理 A(3) 量子力学复习地图 · 勾选完成点会自动保存</div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand"><div class="brand-mark">QM</div><span>量子力学 Mind Map</span></div>
+      <div class="nav-links" aria-label="章节导航">
+        <a href="#map">知识地图</a>
+        <a href="#formula">公式卡</a>
+        <a href="#review">复习抓手</a>
+      </div>
+      <label class="search" aria-label="搜索知识点">
+        <input id="searchInput" type="search" placeholder="搜索：薛定谔、势阱、氢原子...">
+        <span>⌕</span>
+      </label>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="chevron left"></div>
+      <div class="hero-copy">
+        <span class="eyebrow">37 个核心完成点</span>
+        <h1>大学物理 A(3) 量子力学思维导图</h1>
+        <p class="lead">从黑体辐射与光电效应进入量子图像，再到波函数、算符、测量和定态应用。每个节点都可展开查看要点，也可以打勾记录复习完成度。</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#map">开始复习</a>
+          <button class="btn" id="resetBtn" type="button">重置勾选</button>
+        </div>
+      </div>
+      <div class="viz" aria-label="量子轨道示意图">
+        <div class="orbital">
+          <div class="orbit one"><span class="electron"></span></div>
+          <div class="orbit two"><span class="electron"></span></div>
+          <div class="orbit three"><span class="electron"></span></div>
+          <div class="nucleus"></div>
+        </div>
+        <div class="formula-tile">
+          <strong>中心问题</strong>
+          <code>状态 Ψ 如何演化？测量 A 会得到什么？定态能级 Eₙ 如何出现？</code>
+        </div>
+      </div>
+      <div class="chevron right"></div>
+    </div>
+  </header>
+
+  <main>
+    <section id="map">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>知识地图</h2>
+          <p>先完成“图像与假设”，再进入“数学语言”，最后刷定态应用。</p>
+        </div>
+
+        <div class="progress-panel">
+          <div>
+            <div class="progress-title">当前完成度</div>
+            <div class="bar" aria-label="完成进度"><span id="progressBar"></span></div>
+          </div>
+          <div class="progress-number"><span id="doneCount">0</span>/<span id="totalCount">0</span></div>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="章节筛选">
+          <button class="tab active" type="button" data-filter="all">全部</button>
+          <button class="tab" type="button" data-filter="history">前量子</button>
+          <button class="tab" type="button" data-filter="intro">入门</button>
+          <button class="tab" type="button" data-filter="operator">算符</button>
+          <button class="tab" type="button" data-filter="application">应用</button>
+        </div>
+
+        <div class="map-shell">
+          <aside class="center-node">
+            <h3>量子力学</h3>
+            <p>用波函数描述微观状态，用算符描述可观测量，用薛定谔方程描述演化，用本征值解释测量结果。</p>
+            <div class="stats">
+              <div class="stat"><b>4</b><span>章内容</span></div>
+              <div class="stat"><b>8</b><span>份 PDF</span></div>
+              <div class="stat"><b>6</b><span>复习分支</span></div>
+              <div class="stat"><b>37</b><span>完成点</span></div>
+            </div>
+          </aside>
+
+          <div class="branches" id="branches">
+            <article class="branch" data-category="history">
+              <div class="branch-top">
+                <div>
+                  <h3>第 1 章 · 前量子力学</h3>
+                  <small>旧物理危机：能量量子化与波粒二象性</small>
+                </div>
+                <span class="badge">概念源头</span>
+              </div>
+              <div class="node-list">
+                <div class="node"><label><input type="checkbox" data-id="c1-blackbody"><span class="node-title">黑体辐射与普朗克能量子</span><button class="expand" type="button">＋</button></label><div class="detail">记住紫外灾难、能量量子化 E = nhν，以及它如何打开“连续能量”假设的缺口。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c1-photoelectric"><span class="node-title">光电效应与光子图像</span><button class="expand" type="button">＋</button></label><div class="detail">截止频率、遏止电压、最大初动能 Kmax = hν - W，是爱因斯坦光量子假设的关键证据。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c1-compton"><span class="node-title">康普顿散射</span><button class="expand" type="button">＋</button></label><div class="detail">光子具有动量 p = h/λ，散射后波长改变，说明电磁辐射也可像粒子一样交换能量和动量。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c1-bohr"><span class="node-title">玻尔氢原子模型</span><button class="expand" type="button">＋</button></label><div class="detail">角动量量子化、定态跃迁、氢光谱公式。它能解释谱线，但仍带有半经典拼接。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c1-spectrum"><span class="node-title">氢原子光谱与能级跃迁</span><button class="expand" type="button">＋</button></label><div class="detail">莱曼系、巴耳末系等来自不同末态 n 的跃迁；重点是用能级差 ΔE = hν 读谱线。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c1-limits"><span class="node-title">旧量子论的局限</span><button class="expand" type="button">＋</button></label><div class="detail">能解释部分现象，却缺少统一的状态、测量与演化语言，促成完整量子力学的建立。</div></div>
+              </div>
+            </article>
+
+            <article class="branch" data-category="intro">
+              <div class="branch-top">
+                <div>
+                  <h3>第 2 章 · 量子力学入门</h3>
+                  <small>从物质波到波函数与薛定谔方程</small>
+                </div>
+                <span class="badge">基础框架</span>
+              </div>
+              <div class="node-list">
+                <div class="node"><label><input type="checkbox" data-id="c2-debroglie"><span class="node-title">德布罗意物质波</span><button class="expand" type="button">＋</button></label><div class="detail">λ = h/p，ν = E/h。适用于光子和实物粒子，是波粒二象性的统一表达。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c2-diffraction"><span class="node-title">电子衍射实验</span><button class="expand" type="button">＋</button></label><div class="detail">实物粒子显示干涉和衍射，说明波动性不是数学装饰，而是可观测事实。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c2-wavefunction"><span class="node-title">波函数的统计解释</span><button class="expand" type="button">＋</button></label><div class="detail">|Ψ|² 是概率密度；波函数需单值、有限、连续，并可归一化。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c2-superposition"><span class="node-title">态叠加原理</span><button class="expand" type="button">＋</button></label><div class="detail">若 Ψ₁、Ψ₂ 是可能状态，则线性组合也可表示状态；测量概率由展开系数决定。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c2-uncertainty"><span class="node-title">不确定度关系</span><button class="expand" type="button">＋</button></label><div class="detail">ΔxΔp ≥ ℏ/2。它不是仪器误差，而是非对易量在同一状态中的内禀限制。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c2-schrodinger"><span class="node-title">含时与定态薛定谔方程</span><button class="expand" type="button">＋</button></label><div class="detail">含时方程给出演化；势能与时间无关时可分离变量，得到能量本征值问题。</div></div>
+              </div>
+            </article>
+
+            <article class="branch" data-category="operator">
+              <div class="branch-top">
+                <div>
+                  <h3>第 3 章 · 力学量与算符</h3>
+                  <small>可观测量、本征态、测量和矩阵表示</small>
+                </div>
+                <span class="badge">数学语言</span>
+              </div>
+              <div class="node-list">
+                <div class="node"><label><input type="checkbox" data-id="c3-operator"><span class="node-title">力学量的算符表示</span><button class="expand" type="button">＋</button></label><div class="detail">每个可观测量 A 对应厄米算符 Â；平均值写作 ⟨A⟩ = ∫Ψ*ÂΨ dτ。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c3-rules"><span class="node-title">算符运算规则</span><button class="expand" type="button">＋</button></label><div class="detail">线性、乘法顺序、对易子 [Â, B̂]。量子里顺序常常有物理意义。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c3-eigen"><span class="node-title">本征值与本征函数</span><button class="expand" type="button">＋</button></label><div class="detail">Âψₙ = aₙψₙ；测量 A 只能得到本征值，处于本征态时结果确定。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c3-measurement"><span class="node-title">测量与态坍缩</span><button class="expand" type="button">＋</button></label><div class="detail">一般态可按本征态展开；测量后状态坍缩到对应本征态，概率由系数模方给出。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c3-compatible"><span class="node-title">共同本征态与力学量完全集</span><button class="expand" type="button">＋</button></label><div class="detail">若两个算符对易，可能有共同本征态，可同时确定；完全集用于唯一标记状态。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c3-angular"><span class="node-title">角动量与自旋算符</span><button class="expand" type="button">＋</button></label><div class="detail">角动量量子数、磁量子数和自旋是氢原子与原子结构的必要语言。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c3-matrix"><span class="node-title">表象与矩阵表示</span><button class="expand" type="button">＋</button></label><div class="detail">波函数可看作向量，算符可看作矩阵；换表象就是换基底。</div></div>
+              </div>
+            </article>
+
+            <article class="branch" data-category="application">
+              <div class="branch-top">
+                <div>
+                  <h3>第 4 章 · 一维势场</h3>
+                  <small>势阱、势垒、隧穿和边界条件</small>
+                </div>
+                <span class="badge">定态求解</span>
+              </div>
+              <div class="node-list">
+                <div class="node"><label><input type="checkbox" data-id="c4-infinite"><span class="node-title">一维无限深势阱</span><button class="expand" type="button">＋</button></label><div class="detail">边界条件 ψ(0)=ψ(a)=0 导致 k = nπ/a，能级 En = n²π²ℏ²/(2ma²)。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-finite"><span class="node-title">有限深势阱束缚态</span><button class="expand" type="button">＋</button></label><div class="detail">阱内振荡、阱外指数衰减；波函数连续和导数连续给出能级方程。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-parity"><span class="node-title">奇偶性与对称势</span><button class="expand" type="button">＋</button></label><div class="detail">对称势能下，本征波函数可取奇函数或偶函数，能显著简化匹配条件。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-barrier"><span class="node-title">一维方势垒散射</span><button class="expand" type="button">＋</button></label><div class="detail">求反射系数 R 与透射系数 T；即使 E < V₀，也可能出现非零透射。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-tunnel"><span class="node-title">隧道效应</span><button class="expand" type="button">＋</button></label><div class="detail">势垒区波函数指数衰减但不为零，是 STM、α 衰变和半导体器件的重要基础。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-current"><span class="node-title">概率流密度</span><button class="expand" type="button">＋</button></label><div class="detail">散射问题中用入射、反射、透射概率流定义 R 和 T，并有 R + T = 1。</div></div>
+              </div>
+            </article>
+
+            <article class="branch" data-category="application">
+              <div class="branch-top">
+                <div>
+                  <h3>第 4 章 · 谐振子与氢原子</h3>
+                  <small>最重要的可精确求解模型</small>
+                </div>
+                <span class="badge">模型核心</span>
+              </div>
+              <div class="node-list">
+                <div class="node"><label><input type="checkbox" data-id="c4-ho-potential"><span class="node-title">谐振子势能与哈密顿量</span><button class="expand" type="button">＋</button></label><div class="detail">V(x)=1/2 mω²x²，是分子振动、晶格振动、场量子化的基础模型。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-ho-energy"><span class="node-title">谐振子能级与零点能</span><button class="expand" type="button">＋</button></label><div class="detail">En = (n + 1/2)ℏω，等间隔且有零点能，体现不确定度关系。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-ho-wave"><span class="node-title">谐振子波函数特征</span><button class="expand" type="button">＋</button></label><div class="detail">波函数由高斯因子与多项式组成，节点数随 n 增加，奇偶性明确。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-h-setup"><span class="node-title">氢原子定态方程</span><button class="expand" type="button">＋</button></label><div class="detail">库仑势 V(r) = -e²/(4πε₀r)，利用球坐标和变量分离求解。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-h-quantum"><span class="node-title">三个量子数 n、l、m</span><button class="expand" type="button">＋</button></label><div class="detail">n 决定能量主层，l 决定角动量大小，m 决定角动量 z 分量。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-h-orbital"><span class="node-title">轨道、简并与电子排布</span><button class="expand" type="button">＋</button></label><div class="detail">理解 s/p/d 轨道、同一主壳层容纳电子数，以及全同粒子和泡利不相容的作用。</div></div>
+              </div>
+            </article>
+
+            <article class="branch" data-category="application">
+              <div class="branch-top">
+                <div>
+                  <h3>第 4 章 · 双态氨分子</h3>
+                  <small>矩阵量子力学的二能级实例</small>
+                </div>
+                <span class="badge">二态系统</span>
+              </div>
+              <div class="node-list">
+                <div class="node"><label><input type="checkbox" data-id="c4-nstate"><span class="node-title">N 态系统的薛定谔方程</span><button class="expand" type="button">＋</button></label><div class="detail">选定一组正交归一基后，态由系数列向量表示，哈密顿量由矩阵表示。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-two-matrix"><span class="node-title">二态哈密顿矩阵</span><button class="expand" type="button">＋</button></label><div class="detail">对角元代表两个局域态能量，非对角元代表耦合，耦合会导致能级劈裂。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-energy-rep"><span class="node-title">能量表象与一般表象</span><button class="expand" type="button">＋</button></label><div class="detail">能量表象中 H 对角化；一般表象下若初态不是定态，系统会发生概率振荡。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-ammonia"><span class="node-title">氨分子反转模型</span><button class="expand" type="button">＋</button></label><div class="detail">氮原子位于氢平面两侧的两个构型形成双态；隧穿耦合使能级分裂。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-maser"><span class="node-title">频率标准与微波跃迁</span><button class="expand" type="button">＋</button></label><div class="detail">双态能级差对应特征微波频率，是氨分子钟和 MASER 的物理基础。</div></div>
+                <div class="node"><label><input type="checkbox" data-id="c4-compare"><span class="node-title">把连续模型与离散模型对应起来</span><button class="expand" type="button">＋</button></label><div class="detail">势阱问题是微分方程，双态问题是矩阵方程；二者都在求本征值和本征态。</div></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="formula" class="cloud">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>公式卡</h2>
+          <p>先把这些式子的物理意义讲清楚，再做计算题。它们连接了每章的主线。</p>
+        </div>
+        <div class="formula-grid">
+          <article class="formula-card"><h3>光量子</h3><div class="formula">E = hν, p = h/λ</div><p>用于光电效应、康普顿散射和辐射能量交换。</p></article>
+          <article class="formula-card"><h3>德布罗意关系</h3><div class="formula">λ = h/p = 2π/k</div><p>把粒子动量和波长联系起来，是物质波的核心。</p></article>
+          <article class="formula-card"><h3>概率解释</h3><div class="formula">P(x)dx = |Ψ(x,t)|²dx</div><p>波函数本身不是概率，模平方才对应概率密度。</p></article>
+          <article class="formula-card"><h3>不确定度</h3><div class="formula">Δx · Δp ≥ ℏ/2</div><p>来自非对易关系，不是测量设备不够精密。</p></article>
+          <article class="formula-card"><h3>含时方程</h3><div class="formula">iℏ ∂Ψ/∂t = ĤΨ</div><p>给出量子态随时间的演化。</p></article>
+          <article class="formula-card"><h3>定态方程</h3><div class="formula">Ĥφ = Eφ</div><p>把能级问题转化成本征值问题。</p></article>
+          <article class="formula-card"><h3>无限深势阱</h3><div class="formula">Eₙ = n²π²ℏ² / 2ma²</div><p>边界条件导致能级离散，n = 1,2,3,...。</p></article>
+          <article class="formula-card"><h3>谐振子</h3><div class="formula">Eₙ = (n + 1/2)ℏω</div><p>等间隔能级和零点能是它最重要的结论。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="review">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>复习抓手</h2>
+          <p>“会解释、会列方程、会用边界条件、会读物理意义</p>
+        </div>
+        <div class="review-grid">
+          <article class="review-card">
+            <h3>概念题</h3>
+            <ul>
+              <li>能区分经典概率和量子概率幅。</li>
+              <li>能说明测量为什么会改变状态。</li>
+              <li>能用实验事实解释波粒二象性。</li>
+            </ul>
+          </article>
+          <article class="review-card">
+            <h3>计算题</h3>
+            <ul>
+              <li>先写哈密顿量和定态方程。</li>
+              <li>分区域写通解，再套连续性与归一化。</li>
+              <li>散射题用概率流求 R、T。</li>
+            </ul>
+          </article>
+          <article class="review-card">
+            <h3>模型题</h3>
+            <ul>
+              <li>势阱看边界条件如何量子化。</li>
+              <li>谐振子看零点能和等间隔。</li>
+              <li>氢原子看量子数和简并结构。</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <strong>Quantum Mind Map</strong>
+      <p></p>
+    </div>
+  </footer>
+
+  <script>
+    const storageKey = "qm-mindmap-progress-v1";
+    const checks = Array.from(document.querySelectorAll('input[type="checkbox"][data-id]'));
+    const nodes = Array.from(document.querySelectorAll(".node"));
+    const branches = Array.from(document.querySelectorAll(".branch"));
+    const tabs = Array.from(document.querySelectorAll(".tab"));
+    const searchInput = document.getElementById("searchInput");
+    const progressBar = document.getElementById("progressBar");
+    const doneCount = document.getElementById("doneCount");
+    const totalCount = document.getElementById("totalCount");
+    const resetBtn = document.getElementById("resetBtn");
+    let activeFilter = "all";
+
+    function loadProgress() {
+      const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+      checks.forEach((check) => {
+        check.checked = Boolean(saved[check.dataset.id]);
+        check.closest(".node").classList.toggle("done", check.checked);
+      });
+      updateProgress();
+    }
+
+    function saveProgress() {
+      const data = {};
+      checks.forEach((check) => {
+        if (check.checked) data[check.dataset.id] = true;
+      });
+      localStorage.setItem(storageKey, JSON.stringify(data));
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const total = checks.length;
+      const done = checks.filter((check) => check.checked).length;
+      totalCount.textContent = total;
+      doneCount.textContent = done;
+      progressBar.style.width = total ? `${Math.round(done / total * 100)}%` : "0%";
+    }
+
+    function applyFilters() {
+      const query = searchInput.value.trim().toLowerCase();
+      branches.forEach((branch) => {
+        const categoryMatch = activeFilter === "all" || branch.dataset.category === activeFilter;
+        let hasVisibleNode = false;
+        branch.querySelectorAll(".node").forEach((node) => {
+          const text = node.textContent.toLowerCase();
+          const queryMatch = !query || text.includes(query);
+          node.style.display = queryMatch ? "" : "none";
+          if (queryMatch) hasVisibleNode = true;
+        });
+        branch.classList.toggle("hidden", !categoryMatch || !hasVisibleNode);
+      });
+    }
+
+    document.addEventListener("click", (event) => {
+      const expand = event.target.closest(".expand");
+      if (expand) {
+        event.preventDefault();
+        const node = expand.closest(".node");
+        node.classList.toggle("open");
+        expand.textContent = node.classList.contains("open") ? "－" : "＋";
+      }
+    });
+
+    checks.forEach((check) => {
+      check.addEventListener("change", () => {
+        check.closest(".node").classList.toggle("done", check.checked);
+        saveProgress();
+      });
+    });
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((item) => item.classList.remove("active"));
+        tab.classList.add("active");
+        activeFilter = tab.dataset.filter;
+        applyFilters();
+      });
+    });
+
+    searchInput.addEventListener("input", applyFilters);
+
+    resetBtn.addEventListener("click", () => {
+      checks.forEach((check) => {
+        check.checked = false;
+        check.closest(".node").classList.remove("done");
+      });
+      localStorage.removeItem(storageKey);
+      updateProgress();
+    });
+
+    loadProgress();
+    applyFilters();
+  </script>
+</body>
+</html>
